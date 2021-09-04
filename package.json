@@ -1,0 +1,23 @@
+{
+  "name": "steps-backend-challange",
+  "version": "1.0.0",
+  "description": "steps backend REST api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omersh1998/steps-backend-challange.git"
+  },
+  "author": "Omer Sharoni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omersh1998/steps-backend-challange/issues"
+  },
+  "homepage": "https://github.com/omersh1998/steps-backend-challange#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
