@@ -1,7 +1,9 @@
 const express = require("express");
-const PORT = process.env.PORT || 3000;
-const app = express();
+const config = require("./config");
 const routes = require("./routes/");
+
+const PORT = config.app.port;
+const app = express();
 
 app.use(express.json());
 app.use(
@@ -17,5 +19,6 @@ app.get("/", (req, res) => {
 app.use("/", routes);
 
 app.listen(PORT, () => {
+  require("./db/db");
   console.log(`running on port ${PORT}`);
 });
