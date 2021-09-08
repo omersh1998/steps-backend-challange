@@ -1,5 +1,5 @@
 const post = require("../db/models/posts");
-const runtimes = require("../db/models/runtimes");
+const runtime = require("../db/models/runtimes");
 const limit = 10;
 
 const getTopCreators = async () => {
@@ -10,9 +10,44 @@ const getTopCreators = async () => {
   ]);
 };
 
-const getAverageRuntimes = async () => {
-  //return await runtimes.find();
-  return true;
+const saveRuntimes = (action, start) => {
+  let newRuntime = new runtime({
+    action: action,
+    runtime: Date.now() - start,
+  });
+  return newRuntime
+    .save()
+    .then((a) => {
+      console.log(`saved runtime = ${a}`);
+      return true;
+    })
+    .catch((err) => {
+      console.log(`error saving runtime: ${err}`);
+      return false;
+    });
 };
 
-module.exports = { getTopCreators, getAverageRuntimes };
+const getAverageRuntimes = async () => {
+  let getRuntimes = await runtime.find();
+  let getPostSum = 0,
+    getPostcount = 0,
+    createPostSum = 0,
+    createPostcount = 0;
+
+  getRuntimes.map((item) => {
+    if (item.action == "getPost") {
+      getPostSum += item.runtime;
+      getPostcount++;
+    }
+    if (item.action == "createPost") {
+      createPostSum += item.runtime;
+      createPostcount++;
+    }
+  });
+  return {
+    getPostAverage: `${getPostSum / getPostcount} ms`,
+    createPostAverage: `${createPostSum / createPostcount} ms`,
+  };
+};
+
+module.exports = { getTopCreators, getAverageRuntimes, saveRuntimes };
