@@ -19,6 +19,6 @@ app.get("/", (req, res) => {
 app.use("/", routes);
 
 app.listen(PORT, () => {
-  require("./db/db");
+  require("./db/dbConnection");
   console.log(`running on port ${PORT}`);
 });
