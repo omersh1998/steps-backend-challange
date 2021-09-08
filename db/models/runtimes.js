@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
 const runtimesSchema = new mongoose.Schema({
-  creator: "string",
-  title: "string",
-  body: "string",
-  creationDate: "date",
+  action: "string",
+  runtime: "number",
 });
 
 const runtimes = mongoose.model("runtime", runtimesSchema);
